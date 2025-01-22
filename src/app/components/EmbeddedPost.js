@@ -395,106 +395,56 @@ export default function EmbeddedPost({ post, isDark }) {
 
   return (
     <div className={`border ${isDark ? 'bg-gray-900 border-gray-700 text-white' : 'bg-white border-gray-200'} rounded-lg p-4 hover:shadow-md transition-shadow`}>
-    <div className="flex flex-col sm:flex-row justify-between items-start mb-4">
-        <div className="flex items-start space-x-3 mb-3 sm:mb-0">
-          <a href={`/profile/${post.author.handle}`} className="flex-shrink-0">
-            <img
-              src={post.author.avatar}
-              alt={post.author.displayName}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full"
-            />
-          </a>
-
-          <div className="flex flex-col min-w-0 flex-1">
-            <div className="flex items-start justify-between w-full sm:w-auto">
-              <div className="flex flex-col min-w-0">
-                <a href={`/profile/${post.author.handle}`}
-                   className={`font-bold ${isDark ? 'text-white' : 'text-black'} hover:underline truncate`}>
+ <div className="flex flex-col sm:flex-row justify-between items-start mb-4">
+      <div className="flex items-start space-x-3 mb-3 sm:mb-0 w-full">
+        <a href={`/profile/${post.author.handle}`} className="flex-shrink-0">
+          <img src={post.author.avatar} alt={post.author.displayName} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full" />
+        </a>
+        <div className="flex flex-col min-w-0 flex-1">
+          <div className="flex items-start w-full">
+            <div className="flex flex-col min-w-0 flex-1">
+              <div className="flex items-center justify-between w-full">
+                <a href={`/profile/${post.author.handle}`} className={`font-bold ${isDark ? 'text-white' : 'text-black'} hover:underline truncate max-w-[180px]`}>
                   {post.author.displayName || post.author.handle}
                 </a>
-                <div className="flex items-center space-x-2 text-sm">
-                  <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'} truncate`}>
-                    @{post.author.handle}
-                  </span>
-                  <span className="hidden sm:inline ${isDark ? 'text-gray-500' : 'text-gray-500'}">·</span>
-                  <time className="hidden sm:inline ${isDark ? 'text-gray-400' : 'text-gray-500'} hover:underline whitespace-nowrap">
-                    {formatDistanceToNow(new Date(post.record.createdAt))} ago
-                  </time>
-                </div>
-                <div className="block sm:hidden text-sm mt-1">
-                  <time className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                    {formatDistanceToNow(new Date(post.record.createdAt))} ago
-                  </time>
-                </div>
-              </div>
-              
-              {currencyInfo && (
-                <div className="sm:hidden flex flex-col items-end space-y-2  ml-4">
-                  <div className="flex items-center space-x-2">
+                {currencyInfo && (
+                  <div className="sm:hidden flex items-center space-x-2">
                     <div className={`flex items-center space-x-1 px-2 py-1 rounded-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-                      <img
-                        src={currencyInfo.logo}
-                        alt={currencyInfo.name}
-                        className="w-4 h-4"
-                      />
-                      <span className={`text-xs font-medium ${isDark ? 'text-white' : 'text-black'}`}>
-                        {currencyInfo.name}
-                      </span>
+                      <img src={currencyInfo.logo} alt={currencyInfo.name} className="w-4 h-4" />
+                      <span className={`text-xs font-medium ${isDark ? 'text-white' : 'text-black'}`}>{currencyInfo.name}</span>
                     </div>
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Bluesky_Logo.svg"
-                      alt="Bluesky"
-                      className="w-4 h-4"
-                    />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Bluesky_Logo.svg" alt="Bluesky" className="w-4 h-4" />
                   </div>
-                  <button
-                    onClick={handleFollow}
-                    className={`text-xs font-bold px-3 py-1 rounded-full transition-colors ${
-                      isFollowing 
-                        ? 'bg-gray-200 hover:bg-gray-300 text-gray-800' 
-                        : 'bg-[#0085ff] hover:bg-blue-600 text-white'
-                    }`}
-                  >
-                    {isFollowing ? 'Following' : 'Follow'}
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {currencyInfo && (
-          <div className="hidden sm:flex flex-col items-end space-y-2 ml-auto">
-            <div className="flex items-center space-x-4">
-              <div className={`flex items-center space-x-2 px-3 py-1 rounded-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-                <img
-                  src={currencyInfo.logo}
-                  alt={currencyInfo.name}
-                  className="w-5 h-5"
-                />
-                <span className={`text-sm font-medium ${isDark ? 'text-white' : 'text-black'}`}>
-                  {currencyInfo.name}
-                </span>
+                )}
               </div>
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Bluesky_Logo.svg"
-                alt="Bluesky"
-                className="w-5 h-5"
-              />
+              <div className="flex items-center space-x-2 text-sm mt-1">
+                <span className={`${isDark ? 'text-gray-400' : 'text-gray-600'} truncate`}>@{post.author.handle}</span>
+                <span className="hidden sm:inline text-gray-500">·</span>
+                <time className="hidden sm:inline text-gray-500 hover:underline whitespace-nowrap">
+                  {formatDistanceToNow(new Date(post.record.createdAt))} ago
+                </time>
+              </div>
+              <div className="block sm:hidden text-sm mt-1">
+                <time className={`${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                  {formatDistanceToNow(new Date(post.record.createdAt))} ago
+                </time>
+              </div>
             </div>
-            <button
-              onClick={handleFollow}
-              className={`text-sm font-bold px-4 py-1 rounded-full transition-colors ${
-                isFollowing 
-                  ? 'bg-gray-200 hover:bg-gray-300 text-gray-800' 
-                  : 'bg-[#0085ff] hover:bg-blue-600 text-white'
-              }`}
-            >
-              {isFollowing ? 'Following' : 'Follow'}
-            </button>
           </div>
-        )}
         </div>
+      </div>
+      {currencyInfo && (
+        <div className="hidden sm:flex flex-col items-end space-y-2 ml-auto">
+          <div className="flex items-center space-x-4">
+            <div className={`flex items-center  space-x-2 w-28 px-3 py-1 rounded-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+              <img src={currencyInfo.logo} alt={currencyInfo.name} className="w-5 h-5" />
+              <span className={`text-sm font-medium ${isDark ? 'text-white' : 'text-black'}`}>{currencyInfo.name}</span>
+            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Bluesky_Logo.svg" alt="Bluesky" className="w-5 h-5" />
+          </div>
+        </div>
+      )}
+    </div>
 
       <div className={`mt-3 text-[15px] whitespace-pre-wrap ${isDark ? 'text-gray-200' : 'text-gray-900'}`}>
         {renderText(post.record.text)}
